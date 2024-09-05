@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-const port = process.env.PORT || 443; // Використовуємо порт з середовища або 10000 за замовчуванням
+const port = process.env.PORT || 10000; // Використовуємо порт з середовища або 10000 за замовчуванням
 
 const wss = new WebSocket.Server({ port });
 
