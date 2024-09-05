@@ -7,10 +7,10 @@ wss.on('connection', (ws) => {
     console.log('New client connected');
 
     ws.on('message', (message) => {
-        // Розсилаємо повідомлення всім іншим клієнтам
+        // Пересилаємо сигнал іншим клієнтам
         wss.clients.forEach(client => {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(message); // Надсилаємо отримані дані всім клієнтам
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(message);
             }
         });
     });
