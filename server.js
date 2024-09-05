@@ -1,5 +1,5 @@
 const WebSocket = require('ws');
-const port = process.env.PORT || 10000; // Використовуємо порт з середовища або 10000 за замовчуванням
+const port = process.env.PORT || 10000;
 
 const wss = new WebSocket.Server({ port });
 
@@ -7,10 +7,10 @@ wss.on('connection', (ws) => {
     console.log('New client connected');
 
     ws.on('message', (message) => {
-        // Передаємо отримане повідомлення всім підключеним клієнтам
+        // Розсилаємо повідомлення всім іншим клієнтам
         wss.clients.forEach(client => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(message);
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(message); // Надсилаємо отримані дані всім клієнтам
             }
         });
     });
@@ -24,6 +24,4 @@ wss.on('connection', (ws) => {
     });
 });
 
-// Логування для перевірки URL
-const host = process.env.RENDER_EXTERNAL_HOSTNAME || 'localhost';
-console.log(`Signaling server is running on ws://${host}:${port}`);
+console.log(`Signaling server is running on ws://localhost:${port}`);
