@@ -1,7 +1,6 @@
 const WebSocket = require('ws');
-const port = process.env.PORT || 8080; // Використовуємо порт з середовища або 8080 за замовчуванням
+const port = process.env.PORT || 10000; // Використовуємо порт з середовища або 10000 за замовчуванням
 
-// Створюємо WebSocket сервер і слухаємо на порту
 const wss = new WebSocket.Server({ port });
 
 wss.on('connection', (ws) => {
@@ -26,5 +25,5 @@ wss.on('connection', (ws) => {
 });
 
 // Логування для перевірки URL
-const host = '0.0.0.0'; // Для Render використовується 0.0.0.0
+const host = process.env.RENDER_EXTERNAL_HOSTNAME || 'localhost';
 console.log(`Signaling server is running on ws://${host}:${port}`);
