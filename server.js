@@ -24,4 +24,6 @@ wss.on('connection', (ws) => {
     });
 });
 
-console.log(`Signaling server is running on ws://localhost:${port}`);
+// Логування для перевірки URL
+const host = process.env.RENDER_EXTERNAL_HOSTNAME || 'localhost';
+console.log(`Signaling server is running on ws://${host}:${port}`);
